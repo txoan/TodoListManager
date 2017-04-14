@@ -1,13 +1,15 @@
 //
-//  TodoList.swift
+//  TodoListModel.swift
 //  TodoListManager
 //
 //  Created by Joan Fabregat Bellido on 14/04/2017.
 //  Copyright © 2017 Joan Fabregat Bellido. All rights reserved.
 //
 
-struct TodoList {
+import Foundation
 
+struct TodoList {
+    
     var arrayTodo: [TodoElement]
     
     init() {
@@ -37,7 +39,7 @@ struct TodoList {
 }
 
 struct TodoElement {
-
+    
     var name: String
     var done: Bool
     

@@ -13,13 +13,13 @@ class TableTodoListView: ComponentBaseView, UITableViewDelegate, UITableViewData
     // MARK: Cycle life
     override func awakeFromNib() {
         super.awakeFromNib()
-        registerNib()
+//        registerNib()
     }
     
     override func initializeSubviews() {
-        let viewName = StyleMSMaintenanceTableView.viewName
-        viewLocal = Bundle.main.loadNibNamed(viewName, owner: self, options: nil)![0] as? UIView
-        viewLocal?.frame = self.bounds
+//        let viewName = StyleMSMaintenanceTableView.viewName
+//        viewLocal = Bundle.main.loadNibNamed(viewName, owner: self, options: nil)![0] as? UIView
+//        viewLocal?.frame = self.bounds
     }
     
     
@@ -29,7 +29,7 @@ class TableTodoListView: ComponentBaseView, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        return UITableViewCell
+        let cell = UITableViewCell()
+        return cell
     }
 }
