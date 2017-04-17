@@ -8,10 +8,21 @@
 
 import UIKit
 
+struct StyleTodoListView {
+    static let viewName: String = "TodoListView"
+}
+
 class TodoListView: UIView {
+    
+    @IBOutlet weak var tableTodoListView: TableTodoListView!
     
     // MARK: Cycle life
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    // MARK: Public API
+    func configureTableView(_ closures: ClosureTableTodoListView) {
+        tableTodoListView.configureView(closures)
     }
 }
