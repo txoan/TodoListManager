@@ -21,9 +21,73 @@ class TodoListManagerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testManagerAddNewTodoElement() {
+        // Is a Singleton.
+        let manager: TodoListManager = TodoListManager()
+        let before = manager.todolist.getCount()
+        manager.addNewTodoElement()
+        let after = manager.todolist.getCount()
+        XCTAssert(before < after)
+        XCTAssert((before + 1) == after)
+    }
+    
+    func testManagerCountTodoElement() {
+        let manager: TodoListManager = TodoListManager()
+        let num = manager.countTodoElement()
+        XCTAssert(num == 0)
+        
+        manager.addNewTodoElement()
+        manager.addNewTodoElement()
+        manager.addNewTodoElement()
+
+        let newNum = manager.countTodoElement()
+        XCTAssert(newNum == 3)
+    }
+    
+    func testChangeStateElementTodoList() {
+        let manager: TodoListManager = TodoListManager()
+        manager.addNewTodoElement()
+        var data: DataTableTodoListViewCell = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
+        manager.todolist.changeTodoElement(0)
+        data = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .done)
+    }
+    
+    func testChangeStateElementTodoListTwice() {
+        let manager: TodoListManager = TodoListManager()
+        manager.addNewTodoElement()
+        var data: DataTableTodoListViewCell = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
+        manager.todolist.changeTodoElement(0)
+        manager.todolist.changeTodoElement(0)
+        data = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
+    }
+
+    func testChangeStateElementTodoListOdd() {
+        let manager: TodoListManager = TodoListManager()
+        manager.addNewTodoElement()
+        var data: DataTableTodoListViewCell = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
+        for _ in 0...10 {
+            manager.todolist.changeTodoElement(0)
+        }
+        data = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .done)
+    }
+
+    func testChangeStateElementTodoListPairs() {
+        let manager: TodoListManager = TodoListManager()
+        manager.addNewTodoElement()
+        var data: DataTableTodoListViewCell = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
+        for _ in 0...9 {
+            manager.todolist.changeTodoElement(0)
+        }
+        
+        data = manager.todolist.getInfoForCell(0)
+        XCTAssert(data.state == .notDone)
     }
     
     func testPerformanceExample() {
