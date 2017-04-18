@@ -1,3 +1,5 @@
+
+
 //
 //  TodoListManagerUITests.swift
 //  TodoListManagerUITests
@@ -28,9 +30,38 @@ class TodoListManagerUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCountCells () {
+        let addNewTodoButton = XCUIApplication().buttons["Add new TODO"]
+        addNewTodoButton.tap()
+        addNewTodoButton.tap()
+        addNewTodoButton.tap()
+        addNewTodoButton.tap()
+        XCTAssert(XCUIApplication().cells.count == 4)
+        
+    }
+    
+    func testChangeStateCellDoneAndReturnNotDone () {
+        
+        let app = XCUIApplication()
+        app.buttons["Add new TODO"].tap()
+        
+        let tablesQuery = app.tables
+        tablesQuery.buttons["Not done"].tap()
+        tablesQuery.buttons["Done"].tap()
+        XCTAssert(app.tables.buttons["Done"].exists == false)
+        XCTAssert( app.tables.buttons["Not done"].exists)
+    }
+    
+    func testChangeCellToDoneAddOtherCell () {
+        
+        let app = XCUIApplication()
+        let addNewTodoButton = app.buttons["Add new TODO"]
+        addNewTodoButton.tap()
+        let button1 = app.tables.buttons["Not done"]
+        button1.tap()
+        addNewTodoButton.tap()
+        XCTAssert( app.tables.buttons["Done"].exists)
+        XCTAssert( app.tables.buttons["Not done"].exists)
     }
     
 }

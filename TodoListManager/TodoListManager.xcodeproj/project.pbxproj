@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				4E6548FC1EA0CDFC00697BDC /* Model */,
-				4E6548F91EA0CC7B00697BDC /* Controller */,
 				4E6548F81EA0CC6800697BDC /* View */,
+				4E6548F91EA0CC7B00697BDC /* Controller */,
 				4E6548F71EA0CC3D00697BDC /* Manager */,
 			);
 			path = TodoList;
