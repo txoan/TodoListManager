@@ -53,7 +53,7 @@ class TodoListViewController: UIViewController {
             return number
             
         }) { (cell, index) in
-            let closure = ClosureTableTodoListViewCell(changeStateTodoElement: { (state) in
+            let closure = ClosureTableTodoListViewCell(changeStateTodoElement: { () in
                 weakSelf?.manager.changeStateElementTodoListForIndex(index)
             })
             weakSelf?.manager.customCell(cell, index, closure)

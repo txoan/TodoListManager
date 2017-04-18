@@ -53,12 +53,13 @@ class TableTodoListViewCell: UITableViewCell {
     @IBAction func actionBtnFinishElement(_ sender: Any) {
         switch stateTodoElement {
         case .done:
-            self.btnFinishElement.setTitle(StateTodo.notDone.rawValue,for: .normal)
+            stateTodoElement = .notDone
             break
         case .notDone:
-            self.btnFinishElement.setTitle(StateTodo.done.rawValue,for: .normal)
+            stateTodoElement = .done
             break
         }
+        self.btnFinishElement.setTitle(stateTodoElement.rawValue,for: .normal)
         if let closure = closure {
             closure.changeStateTodoElement()
         }
