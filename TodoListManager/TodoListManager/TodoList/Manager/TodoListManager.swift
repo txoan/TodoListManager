@@ -13,8 +13,7 @@ class TodoListManager {
     var todolist: TodoList = TodoList()
     
     //MARK: - public API
-    func addNewTodoElement() {
-        let name = "\(todolist.getCount() + 1)"
+    func addNewTodoElement(_ name: String) {
         todolist.addElement(name)
     }
     
@@ -37,5 +36,9 @@ class TodoListManager {
     
     func changeStateElementTodoListForIndex(_ index: Int) {
         todolist.changeTodoElement(index)
+    }
+    
+    func sortedElements () {
+        todolist.sortByNameTodoList()
     }
 }

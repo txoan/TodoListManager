@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewTodoListView" customModule="TodoListManager" customModuleProvider="target">
             <connections>
                 <outlet property="btnAddNewTodo" destination="m2X-4j-O9H" id="sfA-Yj-9RJ"/>
+                <outlet property="btnSorted" destination="xIz-GV-3CV" id="77Q-8h-7hf"/>
                 <outlet property="lblTitle" destination="ZGF-Mw-wH5" id="Cth-DM-VFn"/>
             </connections>
         </placeholder>
@@ -20,14 +21,11 @@
             <rect key="frame" x="0.0" y="0.0" width="358" height="129"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your List Todo!!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-Mw-wH5">
-                    <rect key="frame" x="16" y="20" width="326" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2X-4j-O9H">
-                    <rect key="frame" x="16" y="79" width="326" height="34"/>
+                    <rect key="frame" x="191" y="79" width="151" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="151" id="93y-j9-WG4"/>
+                    </constraints>
                     <state key="normal" title="Add new TODO">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -35,18 +33,38 @@
                         <action selector="actionBtnAddNewTodo:" destination="-1" eventType="touchUpInside" id="i6L-be-rHT"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIz-GV-3CV">
+                    <rect key="frame" x="16" y="79" width="76" height="34"/>
+                    <state key="normal" title="Sorted">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="actionSortedElements:" destination="-1" eventType="touchUpInside" id="Sno-ah-thc"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your List Todo!!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-Mw-wH5">
+                    <rect key="frame" x="16" y="20" width="326" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="m2X-4j-O9H" secondAttribute="trailing" constant="16" id="0tq-n8-MpO"/>
+                <constraint firstItem="m2X-4j-O9H" firstAttribute="leading" secondItem="xIz-GV-3CV" secondAttribute="trailing" constant="99" id="HZL-bs-WLy"/>
                 <constraint firstItem="ZGF-Mw-wH5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="N4E-zj-37j"/>
+                <constraint firstItem="xIz-GV-3CV" firstAttribute="centerY" secondItem="m2X-4j-O9H" secondAttribute="centerY" id="Slj-KI-ca3"/>
+                <constraint firstAttribute="bottom" secondItem="m2X-4j-O9H" secondAttribute="bottom" constant="16" id="TME-lt-fWd"/>
                 <constraint firstAttribute="trailing" secondItem="ZGF-Mw-wH5" secondAttribute="trailing" constant="16" id="Vf4-E9-oTb"/>
-                <constraint firstAttribute="bottom" secondItem="m2X-4j-O9H" secondAttribute="bottom" constant="16" id="hdR-S5-082"/>
-                <constraint firstItem="m2X-4j-O9H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="pmP-Ag-4SY"/>
+                <constraint firstItem="xIz-GV-3CV" firstAttribute="bottom" secondItem="m2X-4j-O9H" secondAttribute="bottom" id="onf-tz-3F9"/>
                 <constraint firstItem="ZGF-Mw-wH5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wGY-Ev-sfx"/>
+                <constraint firstItem="xIz-GV-3CV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wWT-Uj-m7x"/>
+                <constraint firstItem="xIz-GV-3CV" firstAttribute="top" secondItem="ZGF-Mw-wH5" secondAttribute="bottom" constant="38" id="yKr-hL-dld"/>
+                <constraint firstItem="xIz-GV-3CV" firstAttribute="top" secondItem="m2X-4j-O9H" secondAttribute="top" id="z5q-yS-yfG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="26" y="-214.5"/>
+            <point key="canvasLocation" x="-121" y="-268.5"/>
         </view>
     </objects>
 </document>

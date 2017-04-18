@@ -40,8 +40,13 @@ struct TodoList {
         return DataTableTodoListViewCell(name: name, state: state)
     }
     
+    mutating func sortByNameTodoList() {
+       let sortedArray = arrayTodo.sorted(by: { $0.getName() < $1.getName() })
+       arrayTodo = sortedArray
+    }
+    
     // MARK: Private API
-    private func getNameForIndex(_ index: Int) -> String {
+    func getNameForIndex(_ index: Int) -> String {
         guard arrayTodo.count > index  else {
             fatalError("Not exist index in array!")
         }
@@ -69,10 +74,12 @@ struct TodoList {
 struct TodoElement {
     
     private var name: String
+    private var identifier: String
     private var done: Bool
     
     init(_ name: String) {
         self.name = name
+        self.identifier = NSUUID().uuidString
         done = false
     }
     

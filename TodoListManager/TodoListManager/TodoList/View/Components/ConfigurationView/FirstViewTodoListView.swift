@@ -14,12 +14,14 @@ struct StyleFirstViewTodoListView {
 
 struct ClosureFirstViewTodoListView {
     var addElement: (() -> ())
+    var sortedElements: (() -> ())
 }
 
 class FirstViewTodoListView: ComponentBaseView {
 
     
     //Elements hardCode in .Xib in View...
+    @IBOutlet weak var btnSorted: UIButton!
     @IBOutlet weak var btnAddNewTodo: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
     var closures: ClosureFirstViewTodoListView?
@@ -33,6 +35,10 @@ class FirstViewTodoListView: ComponentBaseView {
         let viewName = StyleFirstViewTodoListView.viewName
         viewLocal = Bundle.main.loadNibNamed(viewName, owner: self, options: nil)![0] as? UIView
         viewLocal?.frame = self.bounds
+    }
+    
+    @IBAction func actionSortedElements(_ sender: Any) {
+        closures?.sortedElements()
     }
     
     @IBAction func actionBtnAddNewTodo(_ sender: Any) {

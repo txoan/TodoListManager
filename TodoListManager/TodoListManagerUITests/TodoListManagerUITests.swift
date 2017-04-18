@@ -10,6 +10,13 @@
 
 import XCTest
 
+struct stringTest {
+    static let textA = "Awqerqwerqweqw"
+    static let textX = "Xqwerqwerqw"
+    static let textD = "Dwqrqwerwq"
+    static let textB = "Bqwerqwerqwe"
+}
+
 class TodoListManagerUITests: XCTestCase {
         
     override func setUp() {
@@ -30,38 +37,106 @@ class TodoListManagerUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testCountCells () {
-        let addNewTodoButton = XCUIApplication().buttons["Add new TODO"]
-        addNewTodoButton.tap()
-        addNewTodoButton.tap()
-        addNewTodoButton.tap()
-        addNewTodoButton.tap()
-        XCTAssert(XCUIApplication().cells.count == 4)
+    func testAddOneElement() {
+        
+        let app = XCUIApplication()
+        addElement(app)
+        XCTAssert(XCUIApplication().cells.count == 1)
         
     }
     
-    func testChangeStateCellDoneAndReturnNotDone () {
+    func testCancelAddOneElement() {
         
         let app = XCUIApplication()
         app.buttons["Add new TODO"].tap()
-        
-        let tablesQuery = app.tables
-        tablesQuery.buttons["Not done"].tap()
-        tablesQuery.buttons["Done"].tap()
-        XCTAssert(app.tables.buttons["Done"].exists == false)
-        XCTAssert( app.tables.buttons["Not done"].exists)
+        app.alerts["New TODO!"].buttons["Cancel"].tap()
+        XCTAssert(XCUIApplication().cells.count == 0)
     }
     
-    func testChangeCellToDoneAddOtherCell () {
+    func testAdd4Elements() {
         
         let app = XCUIApplication()
-        let addNewTodoButton = app.buttons["Add new TODO"]
-        addNewTodoButton.tap()
-        let button1 = app.tables.buttons["Not done"]
-        button1.tap()
-        addNewTodoButton.tap()
-        XCTAssert( app.tables.buttons["Done"].exists)
-        XCTAssert( app.tables.buttons["Not done"].exists)
+        add4Elements(app)
+        XCTAssert(XCUIApplication().cells.count == 4)
     }
     
+    func testChangeToDone() {
+        
+        let app = XCUIApplication()
+        addElement(app)
+        
+        app.tables.buttons["Not done"].tap()
+        
+        XCTAssert( app.tables.buttons["Not done"].exists == false)
+        XCTAssert( app.tables.buttons["Done"].exists)
+        
+    }
+    
+    func testChangeToDoneToNotDone() {
+        let app = XCUIApplication()
+        addElement(app)
+        
+        app.tables.buttons["Not done"].tap()
+        app.tables.buttons["Done"].tap()
+        
+        XCTAssert( app.tables.buttons["Not done"].exists)
+        XCTAssert( app.tables.buttons["Done"].exists == false)
+        
+    }
+    
+    func testAddElementChangeDone() {
+        let app = XCUIApplication()
+        addElement(app)
+        app.tables.buttons["Not done"].tap()
+        addElement(app)
+        XCTAssert( app.tables.buttons["Not done"].exists)
+        XCTAssert( app.tables.buttons["Done"].exists)
+    }
+    
+    func testSort4Elements() {
+        let app = XCUIApplication()
+        add4Elements(app)
+        app.buttons["Sorted"].tap()
+        let table = app.tables.element(boundBy: 0)
+        let cell = table.cells.element(boundBy: 0)
+        let cell1 = table.cells.element(boundBy: 1)
+        let cell2 = table.cells.element(boundBy: 2)
+        let cell3 = table.cells.element(boundBy: 3)
+        
+        XCTAssert((cell.staticTexts[stringTest.textA]).exists)
+        XCTAssert((cell1.staticTexts[stringTest.textB]).exists)
+        XCTAssert((cell2.staticTexts[stringTest.textD]).exists)
+        XCTAssert((cell3.staticTexts[stringTest.textX]).exists)
+        
+    }
+    
+    private func addElement(_ app: XCUIApplication) {
+        
+        app.buttons["Add new TODO"].tap()
+        
+        let newTodoAlert = app.alerts["New TODO!"]
+        newTodoAlert.collectionViews.textFields["Description"].typeText(stringTest.textA)
+        newTodoAlert.buttons["Confirm"].tap()
+    }
+
+    private func add4Elements(_ app: XCUIApplication) {
+        let addNewTodoButton = app.buttons["Add new TODO"]
+        addNewTodoButton.tap()
+        
+        let newTodoAlert = app.alerts["New TODO!"]
+        let descriptionTextField = newTodoAlert.collectionViews.textFields["Description"]
+        descriptionTextField.typeText(stringTest.textA)
+        
+        let confirmButton = newTodoAlert.buttons["Confirm"]
+        confirmButton.tap()
+        addNewTodoButton.tap()
+        descriptionTextField.typeText(stringTest.textX)
+        confirmButton.tap()
+        addNewTodoButton.tap()
+        descriptionTextField.typeText(stringTest.textD)
+        confirmButton.tap()
+        addNewTodoButton.tap()
+        descriptionTextField.typeText(stringTest.textB)
+        confirmButton.tap()
+    }
 }
