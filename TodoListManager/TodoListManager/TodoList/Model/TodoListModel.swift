@@ -10,38 +10,66 @@ import Foundation
 
 struct TodoList {
     
-    var arrayTodo: [TodoElement]
+    private var arrayTodo: [TodoElement]
     
     init() {
         arrayTodo = []
     }
     
+    // MARK: Public API
     mutating func addElement(_ name:String) {
         let newElement: TodoElement = TodoElement(name)
         self.arrayTodo.append(newElement)
     }
     
     mutating func changeTodoElement( _ index: Int) {
-        if arrayTodo.count > index {
-            arrayTodo[index].changeTodoElement()
-        } else {
+        guard arrayTodo.count > index  else {
             fatalError("Its not possible access Index of element not exist!")
         }
+        arrayTodo[index].changeTodoElement()
     }
     
-    func getDoneTodoElement(_ index: Int) -> Bool {
-        if arrayTodo.count > index {
-            return arrayTodo[index].getDoneTodoElement()
-        } else {
+    func getCount() -> Int {
+        return arrayTodo.count
+    }
+    
+    func getInfoForCell(_ index: Int ) -> DataTableTodoListViewCell {
+        let name = getNameForIndex(index)
+        let state = getStateElement(index)
+        
+        return DataTableTodoListViewCell(name: name, state: state)
+    }
+    
+    // MARK: Private API
+    private func getNameForIndex(_ index: Int) -> String {
+        guard arrayTodo.count > index  else {
+            fatalError("Not exist index in array!")
+        }
+        
+        return arrayTodo[index].getName()
+    }
+    
+    private func getStateElement(_ index: Int) -> StateTodo {
+        let stateBool = getDoneTodoElement(index)
+        if  stateBool {
+            return StateTodo.done
+        }
+        return StateTodo.notDone
+    }
+    
+    private func getDoneTodoElement(_ index: Int) -> Bool {
+        guard arrayTodo.count > index  else {
             fatalError("Its not possible access Index of element not exist!")
         }
+        return arrayTodo[index].getDoneTodoElement()
     }
+    
 }
 
 struct TodoElement {
     
-    var name: String
-    var done: Bool
+    private var name: String
+    private var done: Bool
     
     init(_ name: String) {
         self.name = name
@@ -54,5 +82,9 @@ struct TodoElement {
     
     func getDoneTodoElement() -> Bool {
         return done
+    }
+    
+    func getName() -> String {
+        return name
     }
 }

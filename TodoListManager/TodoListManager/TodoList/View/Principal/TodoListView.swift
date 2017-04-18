@@ -15,6 +15,7 @@ struct StyleTodoListView {
 class TodoListView: UIView {
     
     @IBOutlet weak var tableTodoListView: TableTodoListView!
+    @IBOutlet weak var firstViewTodoListView : FirstViewTodoListView!
     
     // MARK: Cycle life
     override func awakeFromNib() {
@@ -24,5 +25,13 @@ class TodoListView: UIView {
     // MARK: Public API
     func configureTableView(_ closures: ClosureTableTodoListView) {
         tableTodoListView.configureView(closures)
+    }
+    
+    func configurationFirstView(_ closures: ClosureFirstViewTodoListView) {
+        firstViewTodoListView.configureView(closures)
+    }
+    
+    func reloadTable() {
+        tableTodoListView.reloadData()
     }
 }

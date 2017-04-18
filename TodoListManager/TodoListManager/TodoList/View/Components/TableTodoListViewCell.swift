@@ -25,23 +25,19 @@ struct DataTableTodoListViewCell {
     var state: StateTodo
 }
 
+struct ClosureTableTodoListViewCell {
+    var changeStateTodoElement: (() -> ())
+}
+
 class TableTodoListViewCell: UITableViewCell {
     // MARK: IBOutlets
     
     @IBOutlet weak var btnFinishElement: UIButton!
     @IBOutlet weak var nameElement: UILabel!
     
-    var stateTodoElement: StateTodo = .notDone {
-        didSet {
-            switch stateTodoElement {
-            case .done:
-                self.btnFinishElement.titleLabel?.text = StateTodo.done.rawValue
-                break
-            case .notDone:
-                self.btnFinishElement.titleLabel?.text = StateTodo.notDone.rawValue
-            }
-        }
-    }
+    var closure: ClosureTableTodoListViewCell?
+    
+    var stateTodoElement: StateTodo = .notDone
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,15 +53,22 @@ class TableTodoListViewCell: UITableViewCell {
     @IBAction func actionBtnFinishElement(_ sender: Any) {
         switch stateTodoElement {
         case .done:
-            stateTodoElement = .notDone
+            self.btnFinishElement.setTitle(StateTodo.notDone.rawValue,for: .normal)
+            break
         case .notDone:
-            stateTodoElement = .done
+            self.btnFinishElement.setTitle(StateTodo.done.rawValue,for: .normal)
+            break
+        }
+        if let closure = closure {
+            closure.changeStateTodoElement()
         }
     }
 
     //MARK: Public API
-    func configureCell(_ data: DataTableTodoListViewCell ) {
+    func configureCell(_ data: DataTableTodoListViewCell, closures: ClosureTableTodoListViewCell ) {
         nameElement.text = data.name
         stateTodoElement = data.state
+        btnFinishElement.setTitle(stateTodoElement.rawValue,for: .normal)
+        closure = closures
     }
 }

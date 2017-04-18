@@ -13,9 +13,11 @@ import UIKit
 
 class TodoListViewController: UIViewController {
     
+    var manager: TodoListManager = TodoListManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configurationView()
     }
     
     override func loadView() {
@@ -36,5 +38,39 @@ class TodoListViewController: UIViewController {
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
+    
+    func configurationView(){
+        configurationTableTodoListView()
+        configurationFirstViewTodoListView()
+    }
+    
+    func configurationTableTodoListView(){
+        weak var weakSelf = self
+        let closure = ClosureTableTodoListView(numberPlans: { () -> Int in
+            guard let number = weakSelf?.manager.countTodoElement() else {
+                return 0
+            }
+            return number
+            
+        }) { (cell, index) in
+            let closure = ClosureTableTodoListViewCell(changeStateTodoElement: { (state) in
+                weakSelf?.manager.changeStateElementTodoListForIndex(index)
+            })
+            weakSelf?.manager.customCell(cell, index, closure)
+        }
+        
+        (view as! TodoListView).configureTableView(closure)
+    }
+    
+    func configurationFirstViewTodoListView() {
+        weak var weakSelf = self
+        let closure = ClosureFirstViewTodoListView {
+            weakSelf?.manager.addNewTodoElement()
+            (weakSelf?.view as! TodoListView).reloadTable()
+        }
+
+        (view as! TodoListView).configurationFirstView(closure)
+    }
+    
     
 }

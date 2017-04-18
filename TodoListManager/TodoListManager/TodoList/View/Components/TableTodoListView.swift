@@ -45,6 +45,10 @@ class TableTodoListView: ComponentBaseView, UITableViewDelegate, UITableViewData
         self.closures = closures
     }
     
+    func reloadData() {
+        tableView.reloadData()
+    }
+    
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let closures = closures else {

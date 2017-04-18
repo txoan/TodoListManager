@@ -26,9 +26,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbX-hG-Wfy">
-                        <rect key="frame" x="289" y="8" width="78" height="30"/>
+                        <rect key="frame" x="235" y="8" width="132" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="78" id="fTa-tS-Loc"/>
+                            <constraint firstAttribute="width" constant="132" id="fTa-tS-Loc"/>
                         </constraints>
                         <state key="normal" title="Finish"/>
                         <connections>
@@ -39,7 +39,7 @@
                 <constraints>
                     <constraint firstItem="Xnm-DI-UL9" firstAttribute="top" secondItem="1q1-Z3-bCe" secondAttribute="topMargin" constant="3" id="1hb-1n-QoJ"/>
                     <constraint firstItem="BbX-hG-Wfy" firstAttribute="top" secondItem="1q1-Z3-bCe" secondAttribute="top" constant="8" id="1wd-Lu-73F"/>
-                    <constraint firstItem="BbX-hG-Wfy" firstAttribute="leading" secondItem="Xnm-DI-UL9" secondAttribute="trailing" constant="8" id="Dsw-Gr-uNi"/>
+                    <constraint firstItem="BbX-hG-Wfy" firstAttribute="leading" secondItem="Xnm-DI-UL9" secondAttribute="trailing" constant="-46" id="Dsw-Gr-uNi"/>
                     <constraint firstAttribute="bottom" secondItem="BbX-hG-Wfy" secondAttribute="bottom" constant="5" id="EJT-FQ-Hqh"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Xnm-DI-UL9" secondAttribute="bottom" constant="3" id="c6t-lR-fAv"/>
                     <constraint firstItem="Xnm-DI-UL9" firstAttribute="leading" secondItem="1q1-Z3-bCe" secondAttribute="leadingMargin" id="eKi-h4-Z1A"/>
